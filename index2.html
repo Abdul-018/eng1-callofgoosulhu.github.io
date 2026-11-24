@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Call of Goosulhu | Next-Gen Goose Horror Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a1a;
+            --card: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --grad: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            font-family: "Inter", system-ui, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== Floating gradient blobs ===== */
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.35;
+            z-index: -1;
+            animation: float 18s ease-in-out infinite;
+        }
+        .blob-1 { width: 500px; height: 500px; background: #6366f1; top: -150px; left: -100px; }
+        .blob-2 { width: 450px; height: 450px; background: #ec4899; bottom: -150px; right: -100px; animation-delay: -6s; }
+        .blob-3 { width: 350px; height: 350px; background: #8b5cf6; top: 40%; left: 50%; animation-delay: -12s; }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -40px) scale(1.1); }
+            66% { transform: translate(-40px, 50px) scale(0.95); }
+        }
+
+        /* ===== Nav ===== */
+        nav {
+            position: sticky; top: 0; z-index: 10;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 6%;
+            background: rgba(10, 10, 26, 0.6);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        .logo { font-weight: 800; font-size: 1.15rem; }
+        .logo span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        nav ul { display: flex; gap: 28px; list-style: none; }
+        nav a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color .2s; }
+        nav a:hover { color: #fff; }
+
+        /* ===== Hero ===== */
+        .hero { text-align: center; padding: 110px 6% 80px; max-width: 1000px; margin: 0 auto; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 16px; border-radius: 999px;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.35);
+            color: #a5b4fc; font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 28px;
+        }
+        .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 12px #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 50% { opacity: .4; } }
+        .hero h1 {
+            font-size: clamp(2.6rem, 6vw, 4.6rem);
+            font-weight: 800; line-height: 1.08; letter-spacing: -0.03em;
+            margin-bottom: 22px;
+        }
+        .gradient-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero p { font-size: 1.2rem; color: var(--muted); max-width: 680px; margin: 0 auto 40px; }
+        .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            padding: 14px 30px; border-radius: 12px; font-weight: 600;
+            text-decoration: none; transition: all .25s ease; display: inline-flex; gap: 8px; align-items: center;
+        }
+        .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.7); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 50px -10px rgba(236, 72, 153, 0.7); }
+        .btn-secondary { background: var(--card); border: 1px solid var(--border); color: #fff; backdrop-filter: blur(10px); }
+        .btn-secondary:hover { border-color: rgba(139, 92, 246, 0.6); transform: translateY(-3px); }
+
+        /* ===== Stats ===== */
+        .stats {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+            max-width: 1000px; margin: 0 auto 40px; padding: 0 6%;
+        }
+        .stat { text-align: center; padding: 24px; }
+        .stat-num { font-size: 2.4rem; font-weight: 800; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .stat-label { color: var(--muted); font-size: 0.9rem; }
+
+        /* ===== Sections ===== */
+        section { max-width: 1100px; margin: 0 auto; padding: 90px 6%; }
+        .section-tag { color: #a78bfa; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; text-align: center; }
+        section h2 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; text-align: center; margin-bottom: 14px; }
+        .section-sub { color: var(--muted); text-align: center; max-width: 620px; margin: 0 auto 56px; font-size: 1.05rem; }
+
+        .glass {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            backdrop-filter: blur(14px);
+            transition: all .3s ease;
+        }
+        .glass:hover { border-color: rgba(139, 92, 246, 0.5); transform: translateY(-6px); box-shadow: 0 20px 60px -20px rgba(139, 92, 246, 0.45); }
+
+        /* ===== Deliverables grid ===== */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .doc-card { padding: 30px; }
+        .icon {
+            width: 52px; height: 52px; border-radius: 14px;
+            display: grid; place-items: center; font-size: 1.5rem;
+            background: linear-gradient(135deg, rgba(99,102,241,.25), rgba(236,72,153,.25));
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            margin-bottom: 18px;
+        }
+        .doc-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+        .doc-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 20px; }
+        .doc-links { display: flex; gap: 10px; flex-wrap: wrap; }
+        .chip {
+            padding: 7px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+            text-decoration: none; color: #c4b5fd;
+            background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.3);
+            transition: all .2s;
+        }
+        .chip:hover { background: rgba(139, 92, 246, 0.3); color: #fff; }
+
+        /* ===== Timeline / Gantt ===== */
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; }
+        .timeline::before {
+            content: ""; position: absolute; left: 22px; top: 0; bottom: 0; width: 2px;
+            background: linear-gradient(to bottom, #6366f1, #ec4899);
+        }
+        .tl-item { position: relative; padding-left: 70px; margin-bottom: 40px; }
+        .tl-dot {
+            position: absolute; left: 10px; top: 24px; width: 26px; height: 26px; border-radius: 50%;
+            background: var(--grad); box-shadow: 0 0 20px rgba(139, 92, 246, .8);
+            display: grid; place-items: center; font-size: 0.7rem; font-weight: 800; color: #fff;
+        }
+        .tl-card { padding: 24px; }
+        .tl-card h3 { font-weight: 700; margin-bottom: 14px; }
+        .tl-card img, .img-card img {
+            max-width: 100%; height: auto; display: block;
+            border-radius: 12px; border: 1px solid var(--border);
+        }
+
+        /* ===== CRC table ===== */
+        .table-wrap { overflow: hidden; padding: 0; margin-bottom: 40px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 16px 22px; text-align: left; border-bottom: 1px solid var(--border); }
+        th {
+            background: linear-gradient(90deg, rgba(99,102,241,.18), rgba(236,72,153,.18));
+            color: #e0e7ff; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;
+        }
+        tbody tr { transition: background .2s; }
+        tbody tr:hover { background: rgba(139, 92, 246, 0.08); }
+        tbody tr:last-child td { border-bottom: none; }
+        td:first-child { font-weight: 700; color: #c4b5fd; font-family: ui-monospace, monospace; }
+        td { color: var(--muted); }
+
+        .img-card { padding: 24px; margin-bottom: 28px; }
+        .img-card h3 { font-weight: 700; margin-bottom: 14px; }
+
+        /* ===== Team ===== */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px; }
+        .member { padding: 28px; text-align: center; }
+        .avatar {
+            width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 16px;
+            background: var(--grad); display: grid; place-items: center;
+            font-weight: 800; font-size: 1.4rem; color: #fff;
+            box-shadow: 0 0 0 4px rgba(139,92,246,.2), 0 10px 30px -8px rgba(236,72,153,.6);
+        }
+        .member h3 { font-weight: 700; margin-bottom: 6px; }
+        .member a { color: var(--muted); text-decoration: none; font-size: 0.9rem; display: block; transition: color .2s; }
+        .member a:hover { color: #c4b5fd; }
+
+        /* ===== Footer ===== */
+        footer { text-align: center; padding: 50px 6%; color: var(--muted); border-top: 1px solid var(--border); font-size: 0.9rem; }
+
+        /* ===== Scroll reveal ===== */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 760px) {
+            nav ul { display: none; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <nav>
+        <div class="logo">🪿 <span>Goosulhu</span></div>
+        <ul>
+            <li><a href="#deliverables">Deliverables</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#team">Team</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="badge"><span class="dot"></span> 🚀 v1.0.0 is now live — ENG1 Group 2 Team 1</div>
+        <h1>Unleash the Power of<br><span class="gradient-text">Call of Goosulhu</span></h1>
+        <p>A next-generation, sanity-driven survival experience that seamlessly blends cosmic horror with cutting-edge goose AI. Built by passionate engineers, powered by innovation. ✨</p>
+        <div class="cta-row">
+            <a class="btn btn-primary" href="https://github.com/ENG1-CallOfGoosulhu/eng1-callofgoosulhu.github.io/releases/download/v1.0.0/CallOfGoosulhu-1.0.0.jar">⚡ Download Executable JAR</a>
+            <a class="btn btn-secondary" href="https://github.com/ENG1-CallOfGoosulhu/CallOfGoosulhu" target="_blank">💻 Explore the Repository →</a>
+        </div>
+    </header>
+
+    <div class="stats reveal">
+        <div class="stat glass"><div class="stat-num">8</div><div class="stat-label">Visionary Engineers</div></div>
+        <div class="stat glass"><div class="stat-num">6</div><div class="stat-label">Weeks of Innovation</div></div>
+        <div class="stat glass"><div class="stat-num">9</div><div class="stat-label">Core Classes</div></div>
+        <div class="stat glass"><div class="stat-num">∞</div><div class="stat-label">Geese Unleashed</div></div>
+    </div>
+
+    <section id="deliverables">
+        <div class="section-tag">📚 Deliverables</div>
+        <h2>Everything You Need, <span class="gradient-text">All in One Place</span></h2>
+        <p class="section-sub">Comprehensive, meticulously crafted documentation designed to empower stakeholders at every stage of the development lifecycle.</p>
+        <div class="grid">
+            <div class="glass doc-card reveal">
+                <div class="icon">📋</div>
+                <h3>Requirements</h3>
+                <p>A robust foundation of user and system requirements driving every decision.</p>
+                <div class="doc-links"><a class="chip" href="Req1.pdf" target="_blank">👁️ View</a><a class="chip" href="Req1.pdf" download="Req1.pdf">⬇️ Download</a></div>
+            </div>
+            <div class="glass doc-card reveal">
+                <div class="icon">🏗️</div>
+                <h3>Architecture</h3>
+                <p>A scalable, modular design built for performance and extensibility.</p>
+                <div class="doc-links"><a class="chip" href="Arch1.pdf" target="_blank">👁️ View</a><a class="chip" href="Arch1.pdf" download="Arch1.pdf">⬇️ Download</a></div>
+            </div>
+            <div class="glass doc-card reveal">
+                <div class="icon">🗓️</div>
+                <h3>Planning</h3>
+                <p>Agile, data-driven planning that keeps delivery on track and aligned.</p>
+                <div class="doc-links"><a class="chip" href="Plan1.pdf" target="_blank">👁️ View</a><a class="chip" href="Plan1.pdf" download="Plan1.pdf">⬇️ Download</a></div>
+            </div>
+            <div class="glass doc-card reveal">
+                <div class="icon">🛡️</div>
+                <h3>Risk Assessment</h3>
+                <p>Proactive mitigation strategies to ensure resilience at every turn.</p>
+                <div class="doc-links"><a class="chip" href="Risk1.pdf" target="_blank">👁️ View</a><a class="chip" href="Risk1.pdf" download="Risk1.pdf">⬇️ Download</a></div>
+            </div>
+            <div class="glass doc-card reveal">
+                <div class="icon">⚙️</div>
+                <h3>Implementation</h3>
+                <p>Clean, maintainable code that brings the vision to life — seamlessly.</p>
+                <div class="doc-links"><a class="chip" href="Impl1.pdf" target="_blank">👁️ View</a><a class="chip" href="Impl1.pdf" download="Impl1.pdf">⬇️ Download</a></div>
+            </div>
+            <div class="glass doc-card reveal">
+                <div class="icon">🎮</div>
+                <h3>Playable Game</h3>
+                <p>Experience the future of goose-based horror. One click away.</p>
+                <div class="doc-links"><a class="chip" href="https://github.com/ENG1-CallOfGoosulhu/eng1-callofgoosulhu.github.io/releases/download/v1.0.0/CallOfGoosulhu-1.0.0.jar">⬇️ Download JAR</a><a class="chip" href="https://github.com/ENG1-CallOfGoosulhu/CallOfGoosulhu" target="_blank">💻 Repo</a></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="journey">
+        <div class="section-tag">📈 Our Journey</div>
+        <h2>From Idea to <span class="gradient-text">Impact</span></h2>
+        <p class="section-sub">Follow our week-by-week evolution as we transformed a bold vision into reality.</p>
+        <div class="timeline">
+            <div class="tl-item reveal"><div class="tl-dot">1</div><div class="glass tl-card"><h3>🌱 Week 1 — Ideation</h3><img src="Week1 gantt chart.png" alt="Week 1 Gantt Chart"></div></div>
+            <div class="tl-item reveal"><div class="tl-dot">2</div><div class="glass tl-card"><h3>🧠 Week 2 — Discovery</h3><img src="Week2 gantt chart.png" alt="Week 2 Gantt Chart"></div></div>
+            <div class="tl-item reveal"><div class="tl-dot">3</div><div class="glass tl-card"><h3>🏗️ Week 3 — Architecture</h3><img src="Week3 gantt chart.png" alt="Week 3 Gantt Chart"></div></div>
+            <div class="tl-item reveal"><div class="tl-dot">4</div><div class="glass tl-card"><h3>⚡ Week 4 — Acceleration</h3><img src="Week4 gantt chart.png" alt="Week 4 Gantt Chart"></div></div>
+            <div class="tl-item reveal"><div class="tl-dot">5</div><div class="glass tl-card"><h3>🔧 Week 5 — Refinement</h3><img src="Week5 gantt chart.png" alt="Week 5 Gantt Chart"></div></div>
+            <div class="tl-item reveal"><div class="tl-dot">6</div><div class="glass tl-card"><h3>🚀 Week 6 — Launch</h3><img src="Week6 gantt chart.png" alt="Week 6 Gantt Chart"></div></div>
+        </div>
+    </section>
+
+    <section id="architecture">
+        <div class="section-tag">🧩 Architecture</div>
+        <h2>Engineered for <span class="gradient-text">Excellence</span></h2>
+        <p class="section-sub">Initial CRC cards and class diagrams showcasing a thoughtfully layered, object-oriented design.</p>
+
+        <div class="glass table-wrap reveal">
+            <table>
+                <thead>
+                    <tr><th>Class</th><th>Responsibilities</th><th>Collaborators</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Main</td><td>Sets up window, loads map, and runs game loop</td><td>GameWorld, GameTimer, Player</td></tr>
+                    <tr><td>GameWorld</td><td>Stores, updates, and draws all entities</td><td>Entity, Player, Goose</td></tr>
+                    <tr><td>Entity</td><td>Base class for object position and drawing</td><td>None</td></tr>
+                    <tr><td>Player</td><td>Moves player and tracks sanity</td><td>Entity, InputManager, Inventory</td></tr>
+                    <tr><td>InputManager</td><td>Checks keyboard keys (WASD and P)</td><td>None</td></tr>
+                    <tr><td>GameTimer</td><td>Counts down from 5 minutes and pauses game</td><td>InputManager</td></tr>
+                    <tr><td>Goose</td><td>Wanders around map and chases player</td><td>Entity, Player</td></tr>
+                    <tr><td>Inventory</td><td>Holds and uses player items</td><td>Player, Goose</td></tr>
+                    <tr><td>HiddenEvent</td><td>Triggers hidden events on the map</td><td>Entity, Player</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="glass img-card reveal"><h3>🔍 Week 3 Interim Class Diagram</h3><img src="interim-diagram.png" alt="Week 3 Interim Class Diagram"></div>
+        <div class="glass img-card reveal"><h3>✅ Final Class Diagram</h3><img src="class_diagram.png" alt="Final Class Diagram"></div>
+        <div class="glass img-card reveal"><h3>🗂️ Work Breakdown Structure</h3><img src="wbs.png" alt="Work Breakdown Structure"></div>
+    </section>
+
+    <section id="team">
+        <div class="section-tag">🤝 The Team</div>
+        <h2>Meet the <span class="gradient-text">Minds</span> Behind the Magic</h2>
+        <p class="section-sub">A diverse team of passionate innovators united by a shared mission: redefining what a goose can be.</p>
+        <div class="team-grid">
+            <div class="glass member reveal"><div class="avatar">NA</div><h3>Nadrat Abdulsalam</h3><a href="https://github.com/nadrat-a">@nadrat-a</a></div>
+            <div class="glass member reveal"><div class="avatar">JB</div><h3>Jack Boothe</h3><a href="https://github.com/JackBoothe">@JackBoothe</a></div>
+            <div class="glass member reveal"><div class="avatar">SG</div><h3>Stefan Genes</h3><a href="https://github.com/stefangenes1">@stefangenes1</a></div>
+            <div class="glass member reveal"><div class="avatar">LH</div><h3>Liv Howard</h3><a href="https://github.com/Lionraider12">@Lionraider12</a></div>
+            <div class="glass member reveal"><div class="avatar">LM</div><h3>Lisa Maiorova</h3><a href="https://github.com/ellsabetthh">@ellsabetthh</a></div>
+            <div class="glass member reveal"><div class="avatar">CP</div><h3>Charlie Phillips</h3><a href="https://github.com/Charlie-EM-Phillips">@Charlie-EM-Phillips</a><a href="https://github.com/ENG1-CallOfGoosulhu">@ENG1-CallOfGoosulhu</a></div>
+            <div class="glass member reveal"><div class="avatar">GS</div><h3>Gefen Silver</h3><a href="https://github.com/Virrtual">@Virrtual</a></div>
+            <div class="glass member reveal"><div class="avatar">MZ</div><h3>Milan Zsigoszki</h3><a href="https://github.com/hkd535">@hkd535</a></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Built with 💜 by ENG1 Group 2 Team 1 · © 2026 Call of Goosulhu · Empowering the future of geese, one honk at a time. 🪿✨</p>
+    </footer>
+
+    <script>
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+</body>
+</html>
